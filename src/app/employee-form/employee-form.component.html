@@ -1,0 +1,36 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <label for="name">Nombre del Empleado:</label>
+    <input id="name" formControlName="name" type="text">
+    <div *ngIf="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched">
+      Nombre es requerido.
+    </div>
+  
+    <label for="hourlyWage">Salario por Hora:</label>
+    <input id="hourlyWage" formControlName="hourlyWage" type="number">
+    <div *ngIf="employeeForm.get('hourlyWage')?.invalid && employeeForm.get('hourlyWage')?.touched">
+      Salario por hora debe ser un número positivo.
+    </div>
+  
+    <label for="hoursWorked">Horas Trabajadas:</label>
+    <input id="hoursWorked" formControlName="hoursWorked" type="number">
+    <div *ngIf="employeeForm.get('hoursWorked')?.invalid && employeeForm.get('hoursWorked')?.touched">
+      Horas trabajadas deben ser un número positivo.
+    </div>
+  
+    <label for="overtimeHours">Horas Extras:</label>
+    <input id="overtimeHours" formControlName="overtimeHours" type="number">
+    <div *ngIf="employeeForm.get('overtimeHours')?.invalid && employeeForm.get('overtimeHours')?.touched">
+      Horas extras deben ser un número positivo.
+    </div>
+  
+    <button type="submit" [disabled]="employeeForm.invalid">Calcular Salario</button>
+  </form>
+  
+  <div *ngIf="salaryDetails">
+    <h3>Detalles del Salario</h3>
+    <p>Salario Regular: {{ salaryDetails.regularSalary }}</p>
+    <p>Salario por Horas Extras: {{ salaryDetails.overtimeSalary }}</p>
+    <p>Deducciones: {{ salaryDetails.deductions }}</p>
+    <p>Salario Neto: {{ salaryDetails.netSalary }}</p>
+  </div>
+  
